@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Calculator calculator = new Calculator(); -->
+	<bean id="calculator" class="com.gdu.app01.xml01.Calculator"/>
+	
+	<!-- 
+		Student student = new Student();
+		student.setCalculator(calculator);
+		student.setStuNo("10101");
+		student.setName("김밥이");
+	 -->
+	 <bean id="student" class="com.gdu.app01.xml01.Student">
+	 	<property name="calculator" ref="calculator"></property>
+	 	<property name="stuNo" value="10101"></property>
+	 	<property name="stuName" value="김밥이"></property>
+	 </bean>
+</beans>
