@@ -43,7 +43,7 @@ public class BoardController {
 	
 	@GetMapping("/remove.do")
 	public String remove(@RequestParam(value = "board_no", required = false, defaultValue = "0") int board_no, Model model) {
-		model.addAttribute("b", boardService.getBoardbyNo(board_no));
+		boardService.removeBoard(board_no);
 		return "redirect:/board/list.do";
 	}
 	

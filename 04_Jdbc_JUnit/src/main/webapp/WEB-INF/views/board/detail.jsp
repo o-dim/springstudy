@@ -54,9 +54,10 @@
 	<div id="detail_screen">
 		<h1>${b.board_no}번 게시글 상세보기</h1>
 		<div>제목 : ${b.title}</div>
-		<div>작성자 : ${b.writer}</div>
-		<div>작성일 : ${b.created_at}</div>
-		<div>수정일 : ${b.modified_at}</div>
+		<div>
+			<span>작성자 : ${b.writer}</span>&nbsp;&nbsp;&nbsp;<span>작성일 : ${b.created_at}</span>&nbsp;&nbsp;<span>수정일 : ${b.modified_at}</span>
+		</div>
+		<hr>
 		<div>${b.content}</div>
 		<div>
 			<input type="button" value="편집" onclick="fnEdit()">
