@@ -32,7 +32,7 @@ public class ParameterCheckAOP {
 	// 파라미터를 콘솔에 출력하기 위한 LOGGER
 	private static final Logger LOGGER = LoggerFactory.getLogger(ParameterCheckAOP.class);
 	@After("setPointCut()")
-	public void paramLogging(Joinpoint joinPoint) throws Throwable{
+	public void paramLogging(Joinpoint joinPoint) {
 		// 모든 파라미터가 저장된 HttpServletRequest 가져오기
 		ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
 		HttpServletRequest request = servletRequestAttributes.getRequest();

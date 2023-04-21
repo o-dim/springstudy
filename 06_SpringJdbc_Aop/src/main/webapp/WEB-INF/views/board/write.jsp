@@ -53,6 +53,7 @@
 				<textarea id="content" name="content"></textarea>
 			</div>
 			<div>
+				<input type="hidden" name="notice_no" value="${notice.notice_no}">
 				<button>done!</button>
 				<input type="button" value="toLIST" onclick="fnList()"> 
 			</div>
