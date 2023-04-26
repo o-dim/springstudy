@@ -1,7 +1,6 @@
 package com.gdu.app09.config;
 
 import org.apache.ibatis.session.SqlSessionFactory;
-
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
@@ -18,15 +17,16 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-@MapperScan(basePackages = {"com.gdu.app09.mapper"})
-@PropertySource(value = {"classpath:application.properties"})
+@MapperScan(basePackages={"com.gdu.app09.mapper"})           // @Mapper가 존재하는 패키지를 작성한다.
+@PropertySource(value={"classpath:application.properties"})  // application.properties 파일의 속성을 읽어 오자!
+@EnableTransactionManagement                                 // 트랜잭션 처리를 허용한다.
 @Configuration
-@EnableTransactionManagement
 public class DBConfig {
+
 	@Autowired
 	private Environment env;
 	
-	// HikariConfig Bean
+	// HikaryConfig Bean
 	@Bean
 	public HikariConfig hikariConfig() {
 		HikariConfig hikariConfig = new HikariConfig();
@@ -36,31 +36,33 @@ public class DBConfig {
 		hikariConfig.setPassword(env.getProperty("spring.datasource.hikari.password"));
 		return hikariConfig;
 	}
+	
 	// HikariDataSource Bean
-	@Bean(destroyMethod = "close")
-	public HikariDataSource dataSource() {
+	@Bean(destroyMethod="close")
+	public HikariDataSource hikariDataSource() {
 		return new HikariDataSource(hikariConfig());
 	}
 	
-	//SqlSessionFactory Bean
+	// SqlSessionFactory Bean
 	@Bean
-	public SqlSessionFactory factory() throws Exception {
+	public SqlSessionFactory sqlSessionFactory() throws Exception {
 		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
-		bean.setDataSource(dataSource());
+		bean.setDataSource(hikariDataSource());
 		bean.setConfigLocation(new PathMatchingResourcePatternResolver().getResource(env.getProperty("mybatis.config-location")));
 		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.mapper-locations")));
 		return bean.getObject();
 	}
 	
-	// SqlSessionTemplate Bean (기존의 SqlSession)
+	// SqlSessionTemplate Bean
 	@Bean
-	public SqlSessionTemplate template() throws Exception {
-		return new SqlSessionTemplate(factory());
+	public SqlSessionTemplate sqlSessionTemplate() throws Exception {
+		return new SqlSessionTemplate(sqlSessionFactory());
 	}
 	
-	// transactionData Bean
+	// TransactionManager Bean
 	@Bean
 	public TransactionManager transactionManager() {
-		return new DataSourceTransactionManager(dataSource());
+		return new DataSourceTransactionManager(hikariDataSource());
 	}
+	
 }

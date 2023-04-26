@@ -13,11 +13,15 @@
 	$(function(){
 		// recordPerPage의 변경
 		$('#recordPerPage').on('change', function(){
-			location.href = '${contextPath}/employees/change/record.do?recordPerPage=' + $(this).val();  // session에 recordPerPage 올리기
+			location.href = '${contextPath}/employees/change/record.do?recordPerPage=' + $(this).val(); 
 		})
 		// 세션에 저장된 recordPerPage값으로 <select> 태그의 값을 세팅
 		let recordPerPage = '${sessionScope.recordPerPage}' == '' ? '10' : '${sessionScope.recordPerPage}';
 		$('#recordPerPage').val(recordPerPage);
+		// 제목을 클릭하면 정렬 방식을 바꿈
+		$('.title').on('click', function() {
+			location.href = '${contextPath}/employees/pagination.do?column=' + $(this).data('column') + '&order=' + $(this).data('order'); 
+		})
 	})
 </script>
 <style>
@@ -28,6 +32,9 @@
 		font-weight: 900;
 	}
 	.link {
+	}
+	table {
+		width: 1100px;
 	}
 </style>
 <title>THIS IS INDEX</title>
@@ -53,23 +60,23 @@
 			<thead>
 				<tr>
 					<td>순번</td>
-					<td>사원번호</td>
-					<td>사원명</td>
-					<td>이메일</td>
-					<td>전화번호</td>
-					<td>입사일자</td>
-					<td>직업</td>
-					<td>연봉</td>
-					<td>커미션</td>
-					<td>매니저</td>
-					<td>부서번호</td>
-					<td>부서명</td>
+					<td><span class="title" data-column="E.EMPLOYEE_ID" data-order="${order}">사원번호</span></td>
+					<td><span class="title" data-column="E.FIRST_NAME" data-order="${order}">사원명</span></td>
+					<td><span class="title" data-column="E.EMAIL" data-order="${order}">이메일</span></td>
+					<td><span class="title" data-column="E.PHONE_NUMBER" data-order="${order}">전화번호</span></td>
+					<td><span class="title" data-column="E.HIRE_DATE" data-order="${order}">입사일자</span></td>
+					<td><span class="title" data-column="E.JOB_ID" data-order="${order}">직업</span></td>
+					<td><span class="title" data-column="E.SALARY" data-order="${order}">연봉</span></td>
+					<td><span class="title" data-column="E.COMISSION_PCT" data-order="${order}">커미션</span></td>
+					<td><span class="title" data-column="E.MANAGER_ID" data-order="${order}">매니저</span></td>
+					<td><span class="title" data-column="E.DEPARTMENT_ID" data-order="${order}">부서번호</span></td>
+					<td><span class="title" data-column="D.DEPARTMENT_NAME" data-order="${order}">부서명</span></td>
 				</tr>	
 			</thead>
 			<tbody>
 				<c:forEach items="${employees}" var="emp" varStatus="vs">
 				<tr>
-					<td>${vs.index}</td>
+					<td>${beginNo - vs.index}</td>
 					<td>${emp.employeeId}</td>
 					<td>${emp.firstName} ${emp.lastName}</td>
 					<td>${emp.email}</td>

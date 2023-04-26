@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
-<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
-	<!-- Appenders -->
+<configuration scan="true" scanPeriod="30 seconds">
+
+	<!-- Console 화면에 로그를 찍는 console Appender -->
 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
 			<pattern>
@@ -11,24 +11,21 @@
 		</encoder>
 	</appender>
 	
-	<!-- Application Loggers -->
+	<!-- Application Loggers : com.gdu.app09 패키지는 debug 수준의 로그 레벨을 가진다. -->
 	<logger name="com.gdu.app09">
 		<level value="debug" />
 	</logger>
 	
-	<!-- 3rdparty Loggers -->
+	<!-- 3rdparty Loggers : Spring Framework가 info 수준의 로그 레벨을 가진다. -->
 	<logger name="org.springframework.core">
 		<level value="info" />
 	</logger>
-	
 	<logger name="org.springframework.beans">
 		<level value="info" />
 	</logger>
-	
 	<logger name="org.springframework.context">
 		<level value="info" />
 	</logger>
-
 	<logger name="org.springframework.web">
 		<level value="info" />
 	</logger>
@@ -38,4 +35,4 @@
 		<appender-ref ref="console" />
 	</root>
 	
-</log4j:configuration>
+</configuration>

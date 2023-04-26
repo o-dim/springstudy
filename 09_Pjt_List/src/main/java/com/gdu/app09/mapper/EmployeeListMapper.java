@@ -10,5 +10,6 @@ import com.gdu.app09.domain.EmpDTO;
 @Mapper
 public interface EmployeeListMapper {
 	public int getEmployeeCount();
-	public List<EmpDTO> getEmloyeeListUsingPagination(Map<String, Object> map);
+	public List<EmpDTO> getEmployeeListUsingPagination(Map<String, Object> map);
+	public List<EmpDTO> getEmployeeListUsingScroll(Map<String, Object> map);
 }
