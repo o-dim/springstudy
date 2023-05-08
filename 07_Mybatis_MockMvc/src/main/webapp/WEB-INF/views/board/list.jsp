@@ -40,26 +40,35 @@
 </script>
 </head>
 <body>
+
 	<div>
 		<a href="${contextPath}/board/write.do">새글작성하기</a>
 	</div>
+	
 	<div>
 		<table border="1">
 			<thead>
 				<tr>
-					<td>title</td>
-					<td>writer</td>
-					<td>date</td>
+					<td>제목</td>
+					<td>작성자</td>
+					<td>작성일자</td>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${boardList}" var="b">
-					<tr onclick="fnDetail(${b.boardNo})">
-						<td>${b.title}</td>
-						<td>${b.writer}</td>
-						<td>${b.createdAt}</td>
+				<c:if test="${empty boardList}">
+					<tr>
+						<td colspan="3">첫 게시글의 주인공이 되어 보세요!</td>
 					</tr>
-				</c:forEach>
+				</c:if>
+				<c:if test="${not empty boardList}">					
+					<c:forEach items="${boardList}" var="b">
+						<tr onclick="fnDetail(${b.boardNo})">
+							<td>${b.title}</td>
+							<td>${b.writer}</td>
+							<td>${b.createdAt}</td>
+						</tr>
+					</c:forEach>
+				</c:if>
 			</tbody>
 		</table>
 	</div>
