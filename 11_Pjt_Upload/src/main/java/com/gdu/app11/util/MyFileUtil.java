@@ -19,7 +19,7 @@ public class MyFileUtil {
 	public String getPath() {
 		LocalDate date = LocalDate.now();
 		
-		return "/Users/mina/storage" + sep + date.getYear() + sep + String.format("%2d", date.getMonthValue()) + sep +  String.format("%2d", date.getDayOfMonth());
+		return "/Users/mina/storage/" + sep + date.getYear() + sep + String.format("%2d", date.getMonthValue()) + sep +  String.format("%2d", date.getDayOfMonth());
 	}
 	
 	// String fileSystemName 만들기
@@ -42,4 +42,17 @@ public class MyFileUtil {
 		// UUID.extName
 		return UUID.randomUUID().toString().replace("-", "") + "." + extName;
 	}
+
+	// String tempPath 만들기
+	public String getTempPath() {
+		return "/Users/mina/storage" + sep + "temp";
+	}
+	
+	// String tempFileName 만들기(zip 파일)
+	public String getTempfileName() {
+		return UUID.randomUUID().toString().replace("-", "") + ".zip";
+	}
+	
+	
+	
 }
