@@ -10,48 +10,69 @@
 <meta charset="UTF-8">
 <title>INDEX</title>
 <script src="${contextPath}/resources/js/lib/jquery-3.6.4.min.js"></script>
-
+<script>
+  function fnBack(){
+    history.back();
+  }
+</script>
 </head>
 <body>
-	<div>
-		<h3>사원등록</h3>
-		<div>
-			<form id="frm_add">
-				<input type="text" id="sno" name="sno" placeholder="사원번호">
-				<input type="text" id="name" name="name" placeholder="사원명">
-				<input type="text" id="dept" name="dept" placeholder="부서명">
-				<input type="button" value="등록" onclick="fnAdd()">						
-			</form>
-		</div>
-	</div>
-	
-	<hr>
-	
-	<div>
-		<h3>사원조회</h3>
-		<form id="frm_search">
-			<input type="text" id="query" name="query" placeholder="사원번호입력">
-			<input type="button" value="조회" onclick="fnSearch()">
-			<input type="button" value="전체" onclick="fnList()">
-		</form>
-	</div>
-	
-	<hr>
-	
-	<div>
-		<h3>사원목록</h3>
-		<table border="1">
-			<thead>
-				<tr>
-					<td>사원번호</td>
-					<td>사원명</td>
-					<td>부서명</td>
-					<td>연봉</td>
-				</tr>
-			</thead>
-			<tbody id="staffList">
-			</tbody>
-		</table>
-	</div>
+
+  <div>
+  
+    <h1>약관 동의하기</h1>
+    
+    <form id="frmAgree" action="${contextPath}/user/join.jsp">
+    
+      <div>
+        <input type="checkbox" id="checkAll">
+        <label for="checkAll">모두 동의</label>
+      </div>
+      
+      <hr>
+      
+      <div>
+        <input type="checkbox" id="service">
+        <label for="service" >이용약관 동의(필수)</label>
+        <div>
+          <textarea>본 약관은 ...</textarea>
+        </div>
+      </div>
+      
+      <div>
+        <input type="checkbox" id="privacy">
+        <label for="privacy">개인정보수집 동의(필수)</label>
+        <div>
+          <textarea>개인정보보호법에 따라 ...</textarea>
+        </div>
+      </div>
+      
+      <div>
+        <input type="checkbox" id="location" name="location" >
+        <label for="location">위치정보수집 동의(선택)</label>
+        <div>
+          <textarea>위치정보 ...</textarea>
+        </div>
+      </div>
+      
+      <div>
+        <input type="checkbox" id="event" name="event">
+        <label for="event">이벤트 동의(선택)</label>
+        <div>
+          <textarea>이벤트 ...</textarea>
+        </div>
+      </div>
+      
+      <hr>
+      
+      <div>
+        <input type="button" value="취소" onclick="fnBack()">
+        <button>다음</button>
+      </div>
+    
+    </form>
+    
+  </div>
+  
 </body>
 </html>

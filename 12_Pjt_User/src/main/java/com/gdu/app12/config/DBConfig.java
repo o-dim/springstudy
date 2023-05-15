@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-@MapperScan(basePackages = {"com.gdu.staff.mapper"})
+@MapperScan(basePackages = {"com.gdu.app12.mapper"})
 @PropertySource(value = {"classpath:application.properties"})
 @Configuration
 @EnableTransactionManagement
