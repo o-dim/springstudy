@@ -33,14 +33,14 @@ public class JavaMailUtil {
 			
 			//이메일을 보내는 계정 정보를 javax.mail.Session에 저장
 			MimeMessage message = new MimeMessage(Session.getInstance(properties, new Authenticator() {
-				@Override
-				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication(env.getProperty("spring.mail.username")), env.getProperty("spring.mail.password")));
-				}
-			}));
+		        @Override
+		        protected PasswordAuthentication getPasswordAuthentication() {
+		          return new PasswordAuthentication(env.getProperty("spring.mail.username"), env.getProperty("spring.mail.password"));
+		        }
+		    }));
 			
 			// 이메일 만들기
-			message.setFrom(new InternetAddress(env.getProperty("spring.mail.username")), "사이트관리자"));
+			message.setFrom(new InternetAddress(env.getProperty("spring.mail.username"), "사이트관리자"));
 			message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			message.setSubject(title);
 			message.setContent(content, "text/html; charset=UTF-8");
